@@ -16,7 +16,7 @@
   <img src="https://cdn.oto.pet/img/punycode_after.png" style="display: block; width: auto; height: 500px;">
 </details>
 <div style="text-align: center;">
-  <img src="https://github.com/otoneko1102/fix-punycode/blob/main/icons/128x128.png?raw=true" alt="Logo" style="display: block; width: auto; height: 128px;">
+  <img src="https://github.com/otnc/fix-punycode/blob/main/icons/128x128.png?raw=true" alt="Logo" style="display: block; width: auto; height: 128px;">
 </div>
 
 ### Teams
@@ -25,7 +25,7 @@
 
 ### Download
 - [Chrome Webstore](https://chromewebstore.google.com/detail/fix-punycode/fhhpbkpgaokapedjmmaagobopmiochef)
-- [GitHub Releases](https://github.com/otoneko1102/fix-punycode/releases)
+- [GitHub Releases](https://github.com/otnc/fix-punycode/releases)
 
 ## Get Support
 <a href="https://discord.gg/yKW8wWKCnS"><img src="https://discordapp.com/api/guilds/1005287561582878800/widget.png?style=banner4" alt="Discord Banner"/></a>
