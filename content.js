@@ -56,7 +56,22 @@ function punycodeToUnicode(domain) {
 }
 
 let convertedList = [];
+const convertedSet = new Set();
 let isPunycodeFixEnabled = true;
+
+function addConverted(entry) {
+  if (convertedSet.has(entry)) return;
+
+  convertedList.push(entry);
+  convertedSet.add(entry);
+
+  if (!chrome.runtime || !chrome.runtime.id) return;
+  try {
+    chrome.runtime.sendMessage({ action: "updateConvertedList", list: convertedList });
+  } catch (error) {
+    // console.warn("Failed to send message:", error.message);
+  }
+}
 
 const hostname = window.location.hostname;
 
@@ -141,7 +156,7 @@ function replacePunycode(target, urlObj) {
 
   target.addEventListener('mouseover', e => e.preventDefault());
 
-  convertedList.push(`${originalHostname} → ${decodedHostname}`);
+  addConverted(`${originalHostname} → ${decodedHostname}`);
 }
 
 function replaceTextPunycode(textNode) {
@@ -164,7 +179,7 @@ function replaceTextPunycode(textNode) {
   if (text !== replacedText) {
     textNode.nodeValue = replacedText;
     textNode.parentNode.setAttribute("data-punycode-fixed", "true");
-    convertedList.push(`${text} → ${replacedText}`);
+    addConverted(`${text} → ${replacedText}`);
   }
 }
 
@@ -192,14 +207,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-let intervalId = setInterval(() => {
-  if (!chrome.runtime || !chrome.runtime.id) return;
-
-  try {
-    chrome.runtime.sendMessage({ action: "updateConvertedList", list: convertedList });
-  } catch (error) {
-    // console.warn("Failed to send message:", error.message);
-  }
-}, 5000);
-
-window.addEventListener("beforeunload", () => clearInterval(intervalId));
